@@ -2,3 +2,22 @@
     width: 356px;
     height: 200px;
 }
+
+.container {
+    padding: 20px 0px 26px 8px;
+}
+.component {
+    display: flex;
+    align-items: center;
+    :first-child {
+        font-size: 22px;
+    }
+    h2 {
+        color: rgba(22, 24, 35, 1);
+        font-family: ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+        font-weight: 700;
+        font-size: 18px;
+        line-height: 25px;
+        margin-left: 8px;
+    }
+}

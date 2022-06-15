@@ -25,26 +25,97 @@
     background: rgba(22, 24, 35, 0.06);
     border-radius: 92px;
     padding: 0px 0px 0px 16px;
+    border: rgba(22, 24, 35, 0.06);
+    border: 1.5px solid transparent;
     input {
+        width: 200px;
         height: 100%;
         border: none;
         outline: none;
         background-color: transparent;
+        font-size: 16px;
+        caret-color: red;
+    }
+
+    input:not(:placeholder-shown) ~ .search-btn {
+        color: black;
+    }
+
+    &::after {
+        content: '';
+        margin-top: 9px;
+        margin-left: 90px;
+        background-color: rgba(22, 24, 35, 0.12);
+        position: absolute;
+        height: 28px;
+        width: 1px;
+    }
+    &:focus-within {
+        border-color: rgba(22, 24, 35, 0.2);
     }
 }
 
 .clear {
+    position: absolute;
+    border: none;
+    margin-left: 63px;
+    margin-top: 12px;
+    color: rgba(22, 24, 35, 0.2);
 }
 
 .loading {
+    position: absolute;
+    margin-left: 63px;
+    margin-top: 12px;
+    color: rgba(22, 24, 35, 0.2);
 }
 
 .search-btn {
+    color: rgba(22, 24, 35, 0.34);
+    font-size: 1.9rem;
     background-color: #f1f1f2;
     padding: 11px 16px 11px 12px;
     width: 52px;
     height: 100%;
     border: none;
-    border-radius: 92px;
+    border-top-right-radius: 92px;
+    border-bottom-right-radius: 92px;
     float: right;
+    cursor: pointer;
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+.search-result {
+    width: 361px;
+}
+
+.search-tittle {
+    height: 30px;
+    padding: 5px 12px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: rgba(22, 24, 35, 0.5);
+}
+
+.action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon {
+    margin-right: 7px;
+}
+
+.ellipver-btn {
+    cursor: pointer;
+    font-size: 18px;
+    width: 30px;
+    height: 30px;
+    display: block;
+    border: none;
+    outline: none;
+    background-color: #fff;
 }

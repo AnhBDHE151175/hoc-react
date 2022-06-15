@@ -1,0 +1,59 @@
+.wrapper {
+    margin-left: 15px;
+    padding: 10px 16px;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 22px;
+    background-color: white;
+    font-size: 1.6rem;
+    font-family: ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+}
+
+.login {
+    cursor: pointer;
+    margin-right: 15px;
+    border-radius: 4px;
+    border: none;
+    color: rgba(255, 255, 255, 1);
+    background-color: rgb(254, 44, 85);
+    min-height: 36px;
+    min-width: 100px;
+    font-weight: 700;
+    font-size: 16px;
+    font-family: ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+    &:hover {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.06)), #fe2c55;
+    }
+}
+.upload {
+    font-family: ProximaNova, Arial, Tahoma, PingFangSC, sans-serif;
+    cursor: pointer;
+    margin-right: 15px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 24px;
+    color: #161823;
+    background-color: #fff;
+    min-width: 113px;
+    padding: 0 16px;
+    height: 36px;
+    border: 1px solid rgba(22, 24, 35, 0.12);
+    border-radius: 2px;
+    height: 36px;
+    &:hover {
+        background: rgba(22, 24, 35, 0.03);
+    }
+}
+
+.small {
+    min-width: 88px;
+}
+
+.large {
+    min-width: 116px;
+}
+
+.icon {
+    padding-right: 8px;
+}

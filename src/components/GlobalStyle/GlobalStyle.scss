@@ -21,3 +21,15 @@ body {
     line-height: 1.5;
     text-rendering: optimizespeed;
 }
+
+button,
+input,
+[tabindex] {
+    outline: none;
+    border: none;
+}
+
+a {
+    color: #161823;
+    text-decoration: none;
+}
