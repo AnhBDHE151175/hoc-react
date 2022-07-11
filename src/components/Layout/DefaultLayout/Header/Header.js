@@ -59,6 +59,7 @@ function Header() {
                 setLoading(false);
             });
     };
+    //asdasdasdasd
     useEffect(() => {
         if (!searchValue.trim()) {
             setSearchResult([]);
