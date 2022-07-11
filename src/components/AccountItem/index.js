@@ -1,19 +1,24 @@
 import styles from './AccountItem.module.scss';
 import classNames from 'classnames/bind';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleCheck } from '@fortawesome/free-solid-svg-icons';
 
 const cx = classNames.bind(styles);
 
-function AccountItem() {
+function AccountItem({ item }) {
     return (
         <div className={cx('wrapper')}>
-            <img
-                className={cx('avatar')}
-                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKgAAAEsCAMAAABgwwj8AAAAjVBMVEUaGhoAAAAYGBgbGxv////6+voWFhb5+fn29vYTExPz8/MQEBAMDAzu7u7o6Oja2trh4eGysrLe3t7Kysq4uLjU1NSDg4OXl5d1dXW+vr5CQkJra2ugoKAvLy/Hx8cgICCqqqpWVlZXV1c3NzeRkZFhYWF8fHxtbW1KSkqIiIgpKSmcnJxNTU0+Pj4sLCyVzWmrAAAKGElEQVR4nO2c6XKbyhKA1TAbw8wAAgRoRQvaLPn9H+/2yL51ncSW/edkOHX7S9lRZFWq09N7D5lMCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgCIIgJhMhTBKFFuJ7IgPQ7pPQYjxHRABmvp4NBxi1SqMUZnk+a4vL2YxaULPpFsMhH5oliNCyPMPMp2VeLU5ZC5EYq0bjiTCb6VJPj8dZO2oDFbDvbqo+l30CI1ZnbGDBjoehqb2BjlLON6HgvLw2RXNYXPrajNKRhPCnDtuMHaEqZzrbQTLKk48ijPGLmlVavZijGcCIaJQaRTFbJ/tbpuqFgSSN4tASfU4CQ8Z6s9D5AkwUiVEqE+0TVmtWr6BnawMPXY5Qn3E0SeHo+AvcM1agB41QxjciOJcqn8PB6haSyRg9HUHPhtbyAs6ozgmM09Efx47OrtUFel7fYLzlPMp5Wiv+clD64gPnWAWNEoCLtc6p5QStc4yu/oZIyvwOrZzOfbocpZixlyqCGdP1AZotBA/wIkU+ry2wf9tZp5xagZkEPvYUYHU+7+HTxieBA5vm/WyPGTOolCKFfW8ZYpdYq09+7X4ik3bM1leA0I07pu9KsnfsCb3lF7XCPGd1BWlwDxJwlIwzxrn/xli3ScXHnw6a82YEvbDAVONFfAdfT6P0w09n2ukTBBTwjUigo3DJuZReWP8lWQdviQdrOlHIPNtjTIoDn3wEWxROc6Wl1yt+Sfy18E0ltu1wy7mqMGOGb4mSjeVvJy6t4lxxjRJLlyZYKsGm51b1vp4LLmcMFePvtqkyybXSFlXL0HmgxYgl7TCK0QLWlGia/F2jtUJL1V6nzEJi/Hv5PrwbeSJYMm+Z3jY1CqisQmEtBtWTgSPnZWL8SCS0mD43OnR5LyaXiivrfd8bKmNrEMbZ1AhMqiJ4HRInxr6HefzNSvkWp7ygOURmfgcwTTmGMYgwVj+E5OyhS9SrVmgArDiZxFx6aPLVbn0NrlEMlE578fQj4GMwRRv1rs8GjEldNetuTd0eTuFn3gJKrvCsEYlwp/135bQ7QrWcNU19vJRtOwZBeya11I+gryz6++MFBgA2P1Rd07b9tpttRtBymh1DK32YJ9rm1GLC3KYFV6yHouqr7v5SYMQfQXya4Nl7X2cYk2TuFPZuJkE1z6DIe1f39SIdx6QhTueY4X02wkbYKpeiOUawQH0ercu6Kpnrs4F0BKIKuGAEVT4rocs7SKPIXBf3ZXO8OTcDKHgL2T79/i/6p4kj6FDQR4FvM1YCwLCFWB6mxbwF/8MWputRJHxMo4plzXZVOZh1rirmUGfz47FDL8I4y/ZQ240J3ddNHs0Gc5grDbgBoKrxuBnv2naJtZW58wxAW1jsg9tpFCVX5XsPFLjcYhcCHctKnj+KEXzdwh0Tf1+OYJEUQe1WYLwm9dHL2d80Vs5+b1zJKUDDKkCzCC/oxNyYbrYvllUr2JS63Ts5Q/dJ9pmSO4Cc3SCzYxBUwLkoq0OLQrWqFjvFLiBSQNvN8K0DGsaGZWgJ4Yd4eMhvLPGUjwoN1cCtu5sV+CGznsMFU6pvmUMK+d5pCHSmnZUtLJ2skuN5qbEbSZJJL1G9G6c32y70sAQlhIl4TOzqlelsvsTOFEuoBhJ0M6YOAGvsmRfsFnj6FEFbpRPv7Q3sMj1dQLI5dEs89jiBodmDKVV+hUJtgybSSGDfhEF+yOvrpuNy/YpxySxek32bO2zwAE6O5WeY22nYo48MWuUVWvSil0xhYZ+g0ULJNJ4++pQwJ6aWBnZOniCo15tziQ49yG7I5WPN5cNlArOiw4oZhtfEDFfYFAwja1hfAreDpVYKY3u29Wuu2FdU6F/X2a0tWeFP/yL5dBfa56FYCW2d4/oAH+9bRGKNnl8OJhLpudmBwQCWmHAdfjyBBBrs7orX39ZcAjYrnwcSLFq2VQGYFCa7VchEGpmBy8I70W9gPNjX3R3gKN0JzL5SjAcNUeLV6nn6h6qwp0vmWYYVPtyPM2NyZTNVBKz14zhdXc0fbwu4Jj79r9UesK7CGnCJZfUFQoYokSR/unS6tdvK9tg0+cI/7Vy5vqCphu2e4j/vMsTQYBPN2aFknOWlwo7k3m6gWIyhLv0FKLV0OVtjXcK5Ygc469p1LzoO3Tv9ioDBZZmaFitYSsW1PEBvrcV+dfjTnAMSC8idy05YLT+G57x6hYXVLnd8Nooe/78IdHKVx5g2RRI3ZbmDNIJheSklr0Pn0g/EERytk3PjfQx7ZvAbMeFLPugy24zHnSK4KS0XHxdM8Vt6FVBO1XYsOo3Mynpb9HtFLE4/LkFFusnldDOC+c7ELyCuuVRf7b3NXKkxTE28nKtpnndfLRYjuGT1KB4NMFdnXffkVgYU1g7hYxTcnZvm4svZnd+N11bfw4Z97PQGV9Xu/LUYWBakK8vd1YQso+DcWSw6syfxx9cv8MJUHW47jl3JQuWlk9k3HTzm16nl2EsH8yizVW66HlT/VFDUabJXlpd3f8P5rwn3gUiYzbGF18vzx1O8bUKTa8mzRRilRlF6Lqpy/531xX70qzXjehpqqWdaptlP+rf0xtfbPu/DBP744SX1/Acdcbri6ta04cK+gXm1/EHgEea2WlveBgr7It2vs3X9g6cR/X38F13uw+zHI7+9z2o/b/r+w+I6W8WrUF6frNalK3/0VBqWJtrZUM+zYK4vp+WPVrTgclWvw9X6cJj2+f3PQdTvmBu2ztOvi6x/HAHr2vkU+vxIBTSo0b0JeM8IWp675BtvxoBba14FbfISyCxbfGelyZ5bdgoqaAwzhiXcdx9aaqcnYbvm5KqkvH5XkFqJxeDfEukLoFLyeZsp0rnU/GyCXnuOI3N26umACRU6U0/7lb8BKgkjVPakvXu72NMdIfizQqiv+ml2EuBUcUtCy+lDaZY9e6zf3Pi0CP64EDajR61d/mSy7Iusoxc0rEoT1GhzKL8s9KME8jx7rCPDCepX4Js99E0Cn2x03kigs8q3/mGiUxzH2CQL/yCtrvwi7IuTxY9kWIkqEXBGmgKY3enitF7PmhfzuVdjG1BV+2OwmzB+Qz/v2wXjlyHPrNX2i2mtMOdhuKPGQ21v4VJVL7M2t3LrnHXZVM0+dXs4KMn5scyv/krs35bST3N2Q/PCqirn29JlrnZ2/+nhYiWgpOuH5dLfOfjbcmJfB/1hfej6+UsTxQYgHl4/j6NQ51U+aF52bZhxXvR25w0dSvj6PvnqZisUh7q/LO/Vab2eh5g/iIkQfojnN19eUV8NFIWB+8xWy12/qvpAnh+/fYv/94dPwH+GMXBp2+3184ddR4Pw/z0FRtw0Cf9821PeFR6HfqrxR/wbZCQIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAIgiAI4v+S/wDhaZY8xXWVuwAAAABJRU5ErkJggg=="
-                alt="name"
-            />
+            <img className={cx('avatar')} src={item.avatar} alt="name" />
             <div className={cx('info')}>
-                <h4 className={cx('name')}>ducanh.15</h4>
-                <p className={cx('username')}>description</p>
+                <h4 className={cx('name')}>
+                    {item.full_name}
+                    {item.tick && (
+                        <span className={cx('check')}>
+                            <FontAwesomeIcon icon={faCircleCheck} />
+                        </span>
+                    )}
+                </h4>
+                <p className={cx('username')}>{item.nickname}</p>
             </div>
         </div>
     );

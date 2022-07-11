@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import styles from './Header.module.scss';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,6 +17,8 @@ import { Wrapper as WrapperPoper } from '../../../../components/Popper';
 import AccountItem from '../../../../components/AccountItem';
 import Button from '../../../../components/Button/Button';
 import Menu from '../../../../components/Popper/Menu/Menu';
+import request from '../../../../utils/request';
+import useDebound from '../../../../hooks/useDebound';
 // import 'tippy.js/dist/tippy.css';
 
 const cx = classNames.bind(styles);
@@ -39,10 +41,43 @@ const MENU_ITEMS = [
 
 function Header() {
     const [searchResult, setSearchResult] = useState([]);
+    const [searchValue, setSearchValue] = useState('');
+    const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
 
+    const inputRef = useRef();
+    const valueInput = useDebound(searchValue, 500);
+
+    const getSearchResult = () => {
+        request
+            .get(`users/search?q=${encodeURIComponent(valueInput)}&type=less`)
+            .then((res) => {
+                setSearchResult(res.data.data);
+                setLoading(false);
+            })
+            .catch(() => {
+                setLoading(false);
+            });
+    };
     useEffect(() => {
-        setSearchResult([1, 2, 3]);
-    }, []);
+        if (!searchValue.trim()) {
+            setSearchResult([]);
+            return;
+        }
+        setLoading(true);
+        getSearchResult();
+    }, [valueInput]);
+
+    const handleFillSearchInput = (events) => {
+        setSearchValue(events.target.value);
+    };
+
+    const handleClearSearchInput = () => {
+        setSearchValue('');
+        setSearchResult([]);
+        setShowResult(false);
+        inputRef.current.focus();
+    };
 
     return (
         <div className={cx('wrapper')}>
@@ -121,25 +156,34 @@ function Header() {
                 </div>
                 <Tippy
                     interactive
-                    visible={searchResult.length > 0}
+                    visible={showResult && searchResult.length > 0}
                     render={(attrs) => (
                         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
                             <WrapperPoper>
                                 <div className={cx('search-tittle')}>Accounts</div>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
+                                {searchResult.map((item, index) => (
+                                    <AccountItem item={item} />
+                                ))}
                             </WrapperPoper>
                         </div>
                     )}
+                    onClickOutside={() => setShowResult(false)}
                 >
                     <div className={cx('search')}>
-                        <input placeholder="Search accounts and videos" spellCheck={false} />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
-                        </button>
-                        <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>
+                        <input
+                            ref={inputRef}
+                            placeholder="Search accounts and videos"
+                            spellCheck={false}
+                            onChange={handleFillSearchInput}
+                            onClick={() => setShowResult(true)}
+                            value={searchValue}
+                        />
+                        {searchValue && !loading && (
+                            <button className={cx('clear')} onClick={handleClearSearchInput}>
+                                <FontAwesomeIcon icon={faCircleXmark}></FontAwesomeIcon>
+                            </button>
+                        )}
+                        {loading && <FontAwesomeIcon className={cx('loading')} icon={faSpinner}></FontAwesomeIcon>}
                         <span></span>
                         <button className={cx('search-btn')}>
                             <FontAwesomeIcon icon={faMagnifyingGlass}></FontAwesomeIcon>
